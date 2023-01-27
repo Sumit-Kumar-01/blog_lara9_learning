@@ -36,6 +36,7 @@ input[type=submit]:hover {
   padding: 20px;
 }
 </style>
+@include('cdn')
 </head>
 <body>
 
@@ -46,7 +47,7 @@ input[type=submit]:hover {
 
 
 <div class="container">
-  <form action="/action_page.php">
+  <form action="#">
     <label for="fname">First Name</label>
     <input type="text" id="fname" name="firstname" placeholder="Your name..">
 
@@ -63,8 +64,8 @@ input[type=submit]:hover {
     <label for="subject">Subject</label>
     <textarea id="subject" name="subject" placeholder="Write something.." style="height:200px"></textarea>
 
-    <input type="submit" value="Submit">
-  </form>
+    <button type="submit" class="btn btn-info">Submit</button> 
+ </form>
 </div>
 
 </body>

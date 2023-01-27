@@ -13,4 +13,10 @@ class UsersController extends Controller
         return view('users',['name'=>'sumi']);
 
     }
+
+
+    function getData(Request $req){
+        return $req->input();
+
+    }
 }

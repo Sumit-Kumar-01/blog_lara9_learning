@@ -1,6 +1,6 @@
 
 
-<h1>User blade template</h1>
+{{-- <h1>User blade template</h1>
 
 {{20+30}}
 
@@ -19,6 +19,16 @@
 
 
 
- @include('inner')
+ @include('inner') --}}
 
 
+<h1>WElcome To our website</h1>
+
+{{-- <form action="users" method="post">
+ @csrf
+   <input type="text" name="username" placeholder="enter user id">
+   <br><br>
+   <input type="password" name="passord" placeholder="enter your password">
+   <br><br>
+   <button type="submit">Login</button>
+</form> --}}

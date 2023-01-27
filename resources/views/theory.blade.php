@@ -160,3 +160,115 @@ use in js and view inside CONSOLE
 
 
 -->
+
+
+
+{{-- HTML FORM
+ ---------------
+ =============================
+ MAKE CONTROLLER
+
+   function getData(Request $req){
+        return $req->input();
+
+    }
+
+ ROUTE GET AND POST
+
+     Route::post('users',[UsersController::class,'getData']);
+     Route::view('login','users');
+ GET FORM DATA
+     <form action="users" method="post">
+     @csrf
+       <input type="text" name="username" placeholder="enter user id">
+       <br><br>
+       <input type="password" name="passord" placeholder="enter your password">
+       <br><br>
+       <button type="submit">Login</button>
+     </form>
+
+ 
+ --}}
+
+
+
+{{--ADD BOOTSTRAP IN LARAVEL
+ ==========================================
+ 3 WAYS
+ * bootstrap eith cdn
+      CONTENT DELIVERY NETWORK
+
+ * add bbotstrap with single page
+
+ * add bootstrap in multi file project
+
+    
+
+ * common file for bootstrap
+      @include('xyz')
+ 
+
+   --}}
+
+
+
+   {{-- MIDLEWARE
+    =---========================
+    * if we want specific rules and authentication and for filteration
+    * we can write once and use in many pages
+
+    Type:=3
+    Global,Grouped,Routed  === Middleware
+
+
+    Register in kernel.php
+
+
+    GLOBAL 
+    --------
+      \App\Http\Middleware\checkAge::class,
+     
+      checkAge.php
+      -------------
+        if($request->age && $request->age<18){
+            return redirect('noaccess');
+        }
+
+
+    GROUP 
+    --------------
+         kernel.php
+         --------------
+         'protectPage' =>[
+            \App\Http\Middleware\ageCheck::class,
+
+        ]
+
+        web.php
+        ----------
+        Route::group(['middleware'=>['protectPage']],function(){
+             Route::view('users','users');
+              });
+
+              ageCheck.php
+              --------------
+              if($request->age && $request->age<18)
+                {
+            return redirect('noaccess');
+                }
+
+
+    ROUTE MIDDLEWARE
+    --------------------
+    ================================================
+            kernel.php
+         --------------
+         'ageProtected' => \App\Http\Middleware\AgeCheck::class,
+          
+         web.php
+          ---------------
+         Route::view('contact','contact')->middleware('ageProtected');
+
+    
+    
+    --}}
