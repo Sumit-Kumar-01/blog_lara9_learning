@@ -58,6 +58,9 @@
   <h3>Hello user Welcome To the About Page</h3>
 </div>
 
+{{URL::current()}}
+
+
 <div style="overflow:auto">
   <div class="menu">
     <div class="menuitem">The Walk</div>

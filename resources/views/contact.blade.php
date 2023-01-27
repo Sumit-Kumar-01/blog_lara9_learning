@@ -41,6 +41,10 @@ input[type=submit]:hover {
 
 <h3>Contact Form</h3>
 
+
+{{URL::full()}}
+
+
 <div class="container">
   <form action="/action_page.php">
     <label for="fname">First Name</label>

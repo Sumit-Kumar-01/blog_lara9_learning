@@ -21,6 +21,9 @@ Route::get('/about', function () {
 Route::view('/contact','contact'); 
 
 
+
+<a href="{{URL::to('/page name')}}">About</a>
+
  -->
 
 
@@ -62,6 +65,14 @@ it works between model and view
            return "Hellom from controller :- ". $id;
        }
 
+
+       Route::get('/user/{id}',[UserController::class,'lodeview']);
+
+           function lodeview($id){
+               return view('users',['user'=>$id]);
+           }
+       }
+
  -->
 
 
@@ -78,6 +89,74 @@ php artisan make:component <component name>
  it's create 2 files
  HEADER.BLADE.PHP  && HEADER.PHP
 
+
+
+-->
+
+<!-- URL GENERATION 
+=================================
+* CURRENT URL
+-----------------------
+       {{URL::current()}}
+
+* FULL URL
+-----------------------
+        {{URL::full()}}
+
+
+
+* PREVIOUS URL
+-----------------------
+       {{URL::previous()}}
+
+-->
+
+
+
+<!-- BLADE TEMPLATE
+-----------------------------
+=============================
+*
+
+   <h1>User blade template</h1>
+
+   {{20+30}}
+
+   {{$name}}
+
+   @if($name=='sumit')
+   <h1>The Name is currect</h1>
+   @else
+   <h1>Nmae is incurrect</h1>
+   @endif
+
+
+   @for($i=0;$i<5;$i++)
+    <h1>{{$i}}</h1>
+    @endfor
+ 
+
+
+
+
+* @foreach($data as $i)
+  <h1>{{$i}}</h1>
+  @endforeach
+
+
+
+------------INCLUDE VIEW IN VIEW----------------
+=======================================
+
+ @include('inner')
+
+
+use in js and view inside CONSOLE
+----------------------------------
+ <script>
+   var data = @json($data);
+   console.log(data);
+ </script>
 
 
 -->
