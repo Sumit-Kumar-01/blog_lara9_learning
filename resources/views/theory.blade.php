@@ -294,3 +294,86 @@ use in js and view inside CONSOLE
         
         
         --}}
+
+  ******* {{-- HTTP CLIENT
+        ================================================================
+        * It is use to implement/ use the apis .
+
+        GET DATA FROM API
+        -------------------
+        BLADE.PHP
+        ----====------
+                <table border="1">
+                    <tr>
+
+                    <td>ID</td>
+                    <td>Name</td>
+                    <td>Email</td>
+                    <td>Profile Photo</td>
+                    </tr>
+
+                    @foreach($collection as $item)
+                    <tr>
+
+                    <td>{{$item['id']}}</td>
+                    <td>{{$item['first_name']}}</td>
+                    <td>{{$item['email']}}</td>
+                    <td><img src={{$item['avatar']}} alt=""></td>
+                    </tr>
+
+                    @endforeach
+
+                </table>
+
+
+
+        CONTROLLER
+        ----====----
+        use Illuminate\Support\Facades\Http;
+
+
+                function index(){
+                    $data= Http::get("reqres.in/api/users?page=1");
+                    return view('users',['collection'=>$data['data']]);
+                }
+        
+
+        
+        --}}
+
+***********{{--HTTP REQUEST METHOD
+
+        * when we submit , fetch, download all of the things in any website
+        -------------------------------------------------------
+        *GET, PUT, POST,  DELETE, HEAD, PATCH, OPTIONS--
+        ----------------------|^|mostly used
+        ----------------------------------------------------
+        blade.php
+        -----------
+            <form action="users" method="post">
+                @csrf
+                {{@method_field('PUT')}}
+                <input type="text" name="user" placeholder="Enter name"/><br><br>
+                <input type="password" name="password" placeholder="Enter password"/><br><br>
+                <button>Login</button>
+            </form>
+
+        web.php
+        ----------
+            Route::view("login","users");
+            Route::put("users",[UserController::class,"testRequest"]);
+
+        controller
+        ------------
+                function testRequest(Request $req){
+                    return $req->input();
+                    // echo "form Submited";
+                }
+
+
+
+            
+
+    
+    
+        --}}

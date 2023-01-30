@@ -5,6 +5,7 @@ use App\Models\User;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Http;
 
 class UserController extends Controller
 {
@@ -19,8 +20,19 @@ class UserController extends Controller
     }
 
 
+    // function index(){
+    //     return DB::select("select * from users");
+    // }
+
+
     function index(){
-        echo DB::select("select * from user");
+        $data= Http::get("reqres.in/api/users?page=1");
+        return view('users',['collection'=>$data['data']]);
+    }
+
+    function testRequest(Request $req){
+        return $req->input();
+        // echo "form Submited";
     }
 }
 
