@@ -250,7 +250,7 @@ use in js and view inside CONSOLE
              Route::view('users','users');
               });
 
-              ageCheck.php
+             ageCheck.php
               --------------
               if($request->age && $request->age<18)
                 {
@@ -272,3 +272,25 @@ use in js and view inside CONSOLE
     
     
     --}}
+
+
+    {{-- CONNECT WITH DATABASE
+        ====================================================================================
+        controller
+        ------------------
+            function index(){
+                return DB::select("select * from user");
+            }   
+
+    --}}
+
+    {{-- LARAVEL MODEL WITH DB
+        =====================================================================================
+        
+        * model-> map database table with class name
+        * define database structure
+        * write business logic
+        
+        
+        
+        --}}

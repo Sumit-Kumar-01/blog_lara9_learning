@@ -59,4 +59,6 @@ Route::group(['middleware'=>['protectPage']],function(){
 
 Route::view('contact','contact')->middleware('ageProtected');
 
+Route::get("users",[UserController::class,"index"]);
+
 
