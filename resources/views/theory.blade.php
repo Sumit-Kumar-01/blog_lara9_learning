@@ -678,5 +678,70 @@ use in js and view inside CONSOLE
     * find,count
     * insert,update,delete
 
+    MembersController.php
+    ----------------------
+
+    function operations(){
+        // $data= DB::table('members')->get();
+        // return view('list1',['data'=>$data]);
+
+
+        // return DB::table('members')
+        // ->where('address','delhi')
+        // ->get();
+
+
+        // return (array)DB::table('members')->find(4);
+
+        //  return DB::table('members')->count();
+
+        // return DB::table('members')
+        // ->insert([
+        //     'name'=>'Sonu',
+        //     'email'=>'sonu@gmail.com',
+        //     'address'=>'cuttack'
+        // ]);
+
+
+        // return DB::table('members')
+        // ->where('id',14)
+        // ->update([
+        //     'name'=>'Sonu b',
+        //     'email'=>'sonu@gmail.com',
+        //     'address'=>'cuttack'
+        // ]);
+        
+
+        // return DB::table('members')
+        // ->where('id',9)->delete();
+      
+        list1.blade.php
+        -----------------
+        <h1></h1>
+            <table>
+            @foreach($data as $i)
+                <tr>
+                    <td>{{$i->id}}</td>
+                    <td>{{$i->name}}</td>
+                    <td>{{$i->email}}</td>
+                    <td>{{$i->address}}</td>
+                </tr>
+            @endforeach
+            </table>
+
+
+        web.php
+        ---------
+        Route::get('list1',[MembersController::class,'operations']);
+
+ --}}
+
+ **************Aggregates Query in Laravel****************
+ **************                            ***************
+ {{--
+    sum,max,min,avg etc
+    ====================
+        
+    
 
  --}}

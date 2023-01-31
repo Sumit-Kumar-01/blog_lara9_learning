@@ -7,6 +7,7 @@ use App\Http\Controllers\UserAuth;
 use App\Http\Controllers\UploadController;
 use App\Http\Controllers\memberController;
 use App\Http\Controllers\MembersController;
+use App\Http\Controllers\AggregateController;
 
 /*
 |--------------------------------------------------------------------------
@@ -118,3 +119,7 @@ Route::post('edit',[memberController::class,'update']);
 // query builder
 
 Route::get('list1',[MembersController::class,'operations']);
+
+//Aggregate functions
+
+Route::get('agrt',[AggregateController::class,'operations']);
