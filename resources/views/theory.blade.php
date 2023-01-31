@@ -741,7 +741,34 @@ use in js and view inside CONSOLE
  {{--
     sum,max,min,avg etc
     ====================
-        
+        AggregateController.php
+        -----------------------
+        function operations(){
+        // return DB::table('members')->get();
+
+        //sum
+        // return DB::table('members')->sum('id');
+
+        //min
+        // return DB::table('members')->min('id');
+
+        //max
+        return DB::table('members')->max('name');
+
+        // avg
+        // return DB::table('members')->avg('id');
+
+    }
+
+
+    agrt.blade.php
+    -------------
+
+
+    web.php
+    -----------
+    Route::get('agrt',[AggregateController::class,'operations']);
+
     
 
  --}}
