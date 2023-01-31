@@ -577,7 +577,7 @@ use in js and view inside CONSOLE
             <button type="submit">Submit</button>
             </form>
 
-    MembersController.php
+    memberController.php
     ---------------------
             function addData(Request $req){
                 $data =new Member;
@@ -588,7 +588,7 @@ use in js and view inside CONSOLE
                 return redirect('add');
             }
 
-            with fillable rule-----------------------
+            with fillable rule---------in model--------------
             $data = $req->all();
             Member::create($data);
             return redirect('add');
@@ -631,5 +631,52 @@ use in js and view inside CONSOLE
  ***********UPDATE IN DATABASE************
  ***********                  *************
  {{-- 
+        list.blade.php
+        --------------
+                    <a href={{"edit/".$item['id']}}><button class="fa fa-edit btn btn-outline-warning btn-sm"></button></a>
         
+        memberController.php
+        --------------------
+        function update(Request $req){
+            $data= Member::find($req->id);
+            // $data->name=$req->name;
+            // $data->address=$req->address;
+            // $data->email=$req->email;
+            // $data->save();
+
+            $input = $req->all();
+            $data->update($input);
+
+            return redirect('list');
+        }
+
+        edit.blade.php
+        ------------------
+            <h1>update member</h1>
+            <form action="/edit" method="post">
+            @csrf
+            <input type="hidden" name="id"  value={{$data->id}}>
+            <input type="text" name="name" value="{{$data->name}}"> <br><br>
+            <input type="text" name="address" value="{{$data->address}}"> <br><br>
+            <input type="text" name="email" value="{{$data->email}}"> <br><br>
+            <button type="submit">Update</button>
+            </form>
+
+        web.php
+        ----------
+            Route::get('edit/{id}',[memberController::class,'showData']);
+            Route::post('edit',[memberController::class,'update']);
+ --}}
+
+
+ **********Query Builder in Laravel***********
+ **********                         ***********
+ {{--
+    
+    *get result eith table name
+    *where condition
+    * find,count
+    * insert,update,delete
+
+
  --}}

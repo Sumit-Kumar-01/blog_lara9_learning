@@ -108,9 +108,13 @@ Route::get('/profile/{lang}',function($lang){
 Route::get('list',[memberController::class,'show']);
 
 Route::view('add','addmember');
-Route::post('add',[MembersController::class,'addData']);
+Route::post('add',[MemberController::class,'addData']);
 
 Route::get('delete/{id}',[memberController::class,'delete']);
 
 Route::get('edit/{id}',[memberController::class,'showData']);
 Route::post('edit',[memberController::class,'update']);
+
+// query builder
+
+Route::get('list1',[MembersController::class,'operations']);

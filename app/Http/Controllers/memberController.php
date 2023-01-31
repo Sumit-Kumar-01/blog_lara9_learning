@@ -16,10 +16,27 @@ class memberController extends Controller
     // }
 
 
+    function addData(Request $req){
+        // $data =new Member;
+        // $data -> name = $req->name;
+        // $data -> email = $req->email;
+        // $data -> address = $req->address;
+        // $data->save();
+        // return redirect('add');
+
+        $data = $req->all();
+        Member::create($data);
+        return redirect('add');
+
+    }
+
+
     function show(){
         $data= Member::paginate();
         return view('list',['members'=>$data]);
     }
+
+
 
     function delete($id){
         $data= Member::find($id);
