@@ -3,6 +3,10 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\UsersController;
+use App\Http\Controllers\UserAuth;
+use App\Http\Controllers\UploadController;
+use App\Http\Controllers\memberController;
+use App\Http\Controllers\MembersController;
 
 /*
 |--------------------------------------------------------------------------
@@ -61,6 +65,52 @@ Route::view('contact','contact')->middleware('ageProtected');
 
 // Route::get("users",[UserController::class,"index"]);
 
-Route::view("login","users");
-Route::put("users",[UserController::class,"testRequest"]);
+// Route::view("login","users");
+// Route::put("users",[UserController::class,"testRequest"]);
 
+
+
+
+// Route::view("login","login");
+// Route::post("login",[UserAuth::class,"userLogin"]);
+
+// Route::view('profile','profile');
+// Route::get('/logout', function () {
+//     if(session()->has('user'))
+//     {
+//         session()->pull('user',null);
+//     }
+//     return redirect('login');
+// });
+
+// Route::get('/login', function () {
+//     if(session()->has('user'))
+//     {
+//         return redirect('profile');
+//     }
+//     return view('login');
+// });
+
+
+
+// Route::view('upload','upload');
+// Route::post('upload',[UploadController::class,'upload']);
+
+
+// Route::view('profile','profile');
+Route::get('/profile/{lang}',function($lang){
+    App::setlocale($lang);
+    return view('profile');
+});
+
+
+
+Route::get('list',[memberController::class,'show']);
+
+Route::view('add','addmember');
+Route::post('add',[MembersController::class,'addData']);
+
+Route::get('delete/{id}',[memberController::class,'delete']);
+
+Route::get('edit/{id}',[memberController::class,'showData']);
+Route::post('edit',[memberController::class,'update']);

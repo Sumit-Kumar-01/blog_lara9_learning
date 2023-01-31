@@ -60,5 +60,17 @@
   {{@method_field('PUT')}}
   <input type="text" name="user" placeholder="Enter name"/><br><br>
   <input type="password" name="password" placeholder="Enter password"/><br><br>
-  <button>Login</button>
+  <button type="submit">Login</button>
 </form>
+
+
+
+
+
+
+
+
+
+
+
+

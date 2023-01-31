@@ -377,3 +377,259 @@ use in js and view inside CONSOLE
     
     
         --}}
+
+************{{--SESSION
+    -------------------------------------
+    web.php
+    =======
+            // Route::view("login","login");
+            Route::post("login",[UserAuth::class,"userLogin"]);
+
+            Route::view('profile','profile');
+            Route::get('/logout', function () {
+                if(session()->has('user'))
+                {
+                    session()->pull('user',null);
+                }
+                return redirect('login');
+            });
+
+            Route::get('/login', function () {
+                if(session()->has('user'))
+                {
+                    return redirect('profile');
+                }
+                return view('login');
+            }); 
+    
+            login.blade.php
+            ----------------
+            <h1>login </h1>
+            <form action="" method="post">
+            @csrf
+            <input type="text" name="user" placeholder="User name">
+            <br><br>
+            <input type="password" name="password" placeholder="User password">
+            <br><br>
+            <button type="submit">Login</button>
+
+
+            </form>
+
+            profile.blade.php
+            -----------------
+            <h1>Profile Page</h1>
+            <h2>Hello , {{session('user')}}</h2>
+
+            <a href="logout">Logout</a>
+
+
+            userAuth.controller
+            ----------------------
+            function userLogin(Request $req){
+            $data= $req->input('user');
+            $req->session()->put('user',$data);
+            // echo session('user');
+            return redirect('profile');
+             }
+    --}}
+
+
+**************  UPLOAD FILE IN LARAVEL
+{{-- 
+    upload.blade.php
+    ----------------
+        <h1>Upload File Here</h1>
+        <form action="upload" method="post" enctype="multipart/form-data">
+        @csrf
+        <input type="file" name="file"><br><br>
+        <button type="submit">Upload File</button>
+
+        </form>
+
+    web.php
+    ------------
+    Route::view('upload','upload');
+    Route::post('upload',[UploadController::class,'upload']);
+
+    controller
+    -----------
+        function upload(Request $req){
+            return $req->file('file')->store('img');
+         }
+    
+    --}}
+
+************LOCALIZATION********************
+{{-- 
+    * putting your website in multiple languuage is called localization for different country
+    * we need to make respective file and put string respectively
+    * we have to create different pages for different languages in app->lang with specific folder
+    * then we can do changes for default language in the config->app.php-> find locale
+
+    web.php
+    ----------
+    // Route::view('profile','profile');
+    Route::get('/profile/{lang}',function($lang){
+        App::setlocale($lang);
+        return view('profile');
+    });
+    
+    profile.blade.php
+    ------------------
+    <h1>{{__('profile.welcome')}}</h1>
+    <a href="">{{__('profile.list')}}</a>
+    <a href="">{{__('profile.about')}}</a>
+    <a href="">{{__('profile.contact')}}</a>
+
+
+--}}
+
+
+**********USER LIST FROM DATABASE TABLE***********
+**********                             ***********
+{{--
+    make model
+    ---------
+    
+    web.php
+    ---------
+    Route::get('list',[memberController::class,'show']);
+
+    list.blade.php
+    --------------
+        <h1>Members List from database</h1>
+
+        <table border="1">
+        <tr>
+            <td>ID</td>
+            <td>Name</td>
+            <td>email</td>
+            <td>address</td>
+        </tr>
+
+        @foreach($members as $item)
+            <tr>
+            <td>{{$item['id']}}</td>
+            <td>{{$item->name}}</td>
+            <td>{{$item->email}}</td>
+            <td>{{$item['address']}}</td>
+            </tr>
+
+        @endforeach
+        </table>
+
+    memberController.php
+    -----------------------
+         function show(){
+            $data= Member::all();
+            return view('list',['members'=>$data]);
+        }
+ --}}
+
+ **********Laravel Pagination*********
+ **********                  *********
+ {{--
+    make model
+    ----------
+
+    make controller and view
+    ------------------------
+
+    controller
+    ----------
+        function show(){
+            $data= Member::paginate(1);
+            return view('list',['members'=>$data]);
+        }
+
+
+
+    view
+    -------
+
+        <div>
+        {{$members->links()}}
+        </div>
+
+        <style>
+            .w-5{
+                display:none;
+                
+            }
+        </style>
+        
+ --}}
+
+
+
+ *********SAVE DATA IN DATABASE**********
+ *********                     **********
+ {{--
+    addmember.blade.php
+    -------------------
+            <h1>Add Members to DB</h1>
+            <form action="" method="post">
+            @csrf
+            <input type="text" name="name" placeholder="name"><br><br>
+            <input type="email" name="email" placeholder="email"><br><br>
+            <input type="text" name="address" placeholder="address"><br><br>
+            <button type="submit">Submit</button>
+            </form>
+
+    MembersController.php
+    ---------------------
+            function addData(Request $req){
+                $data =new Member;
+                $data -> name = $req->name;
+                $data -> email = $req->email;
+                $data -> address = $req->address;
+                $data->save();
+                return redirect('add');
+            }
+
+            with fillable rule-----------------------
+            $data = $req->all();
+            Member::create($data);
+            return redirect('add');
+    
+
+            Member.php
+            -----------
+                public $timestamps=false;
+                public $fillable= [
+                    'name','email','address'
+                ];
+ --}}
+
+
+ *********DELETE FROM DATABASE*********
+ *********                    *********
+ {{--
+        MAKE MODEL, LIST WITH DELETE BUTTON, MAKE ROUTE, DELETE DATA IN TABLE
+        -----------------------------------------------------------------------
+        list.blade.php
+        --------------
+                <td>
+            <a href={{"delete/".$item['id']}}><button class="fa fa-trash-o btn btn-outline-danger btn-sm"></button></a>
+            </td> 
+        
+        memberController.php
+        ---------------------
+                function delete($id){
+                    $data= Member::find($id);
+                    $data->delete();
+                    return redirect('list');
+                }
+
+        web.php
+        ---------
+                Route::get('delete/{id}',[memberController::class,'delete']);
+ --}}
+
+
+ ***********UPDATE IN DATABASE************
+ ***********                  *************
+ {{-- 
+        
+ --}}
