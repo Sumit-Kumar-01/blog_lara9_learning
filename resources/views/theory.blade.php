@@ -1137,9 +1137,28 @@ use in js and view inside CONSOLE
 
          api.php
     -=----------
-    
+
     //DELETE METHOD API
     Route::delete('delete/{id}',[DeviceCont::class,'delete']);
 
+
+ --}}
+
+ *******SEARCH API *********
+ **************************************
+
+ {{--
+    DeviceCont.php controller
+    ------------------------------
+ 
+        function search($name){
+                return Device::where("name","like","%".$name."%")->get();
+        }
+
+     api.php
+    -=----------
+
+    //SEARCH API
+    Route::get('search/{name}',[DeviceCont::class,'search']);
 
  --}}
