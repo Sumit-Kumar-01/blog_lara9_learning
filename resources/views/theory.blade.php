@@ -1086,7 +1086,7 @@ use in js and view inside CONSOLE
  --}}
 
 
- *******API WITH PUT METHOD*********
+*******API WITH PUT METHOD*********
 ************************************
 {{--
      DeviceCont.php controller
@@ -1111,4 +1111,35 @@ use in js and view inside CONSOLE
     -=----------
         //PUT METHOD API
         Route::put('update',[DeviceCont::class,'update']);
+ --}}
+
+ *******API WITH DELETE METHOD*********
+ **************************************
+ {{--
+    DeviceCont.php controller
+    ------------------------------
+
+        function delete($id){
+            // return ['result'=>'Record has been deleted'.$id];
+
+            $device = Device::find($id);
+           $result= $device->delete();
+
+           if($result)
+            {
+                return ['result'=>'Record has been deleted '.$id];
+
+            }
+            else{
+                return ['result'=>'Operation Failed'];
+            }
+        }
+
+         api.php
+    -=----------
+    
+    //DELETE METHOD API
+    Route::delete('delete/{id}',[DeviceCont::class,'delete']);
+
+
  --}}

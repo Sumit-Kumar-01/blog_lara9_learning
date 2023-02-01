@@ -33,4 +33,5 @@ Route::post('add',[DeviceCont::class,'add']);
 //PUT METHOD API
 Route::put('update',[DeviceCont::class,'update']);
 
-
+//DELETE METHOD API
+Route::delete('delete/{id}',[DeviceCont::class,'delete']);
