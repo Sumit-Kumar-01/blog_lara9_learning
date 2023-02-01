@@ -772,3 +772,222 @@ use in js and view inside CONSOLE
     
 
  --}}
+
+ **************JOUIN IN LARAVEL****************
+ **************                ****************
+ {{--
+    EmployeeController.php
+    ------------------------
+        function getData(){
+            return DB::table('employee')
+            ->join('company','employee.id','=','company.employee_id')
+            ->select('company.*','employee.*')
+            ->where('employee.name','sonu')
+            ->get();
+        } 
+
+    web.php
+    ----------
+        Route::get('listj',[EmployeeController::class,'getData']);
+
+ --}}
+
+ **********Migration Important Command**************
+ *************                     *****************
+ {{--
+   * how to reset migration
+    -----------------------
+            php artisan migrate:reset
+                to remove all migrated file
+
+   * Rollback Migration
+    -----------------------
+            php artisan migrate:rollback --step 3
+              to remove last 3 step,  it count last migration as one step.
+
+
+   * Rollback Step, Refresh
+    ------------------------
+            php artisan migrate:refresh
+
+
+
+   * Single File Migration
+    ------------------------
+
+
+    php artisan make:migration create_test5_table
+
+    php artisan migrate
+
+    php artisan migrate:reset
+
+    php artisan migrate:rollback --step 3
+
+    php artisan migrate --path==/database/migrations/2023_09_21_141958_create_test5_table.php
+
+    php artisan migrate:refresh
+
+    
+ --}}
+
+
+ ********Laravel Jetstream***************
+ *********               ****************
+ {{--
+
+ --}}
+
+
+ ************LARAVEL ACCESSOR**************
+ ******************************************
+ {{-- 
+    when we fetch data from database and before showing we want to modifi then we can do through 
+    
+    model Member.php
+        ---------------
+        function getNameAttribute($value){
+            return ucFirst($value.', India');
+        }
+
+        // function getAddressAttribute($value){
+        //     return $value.', India';
+        // }
+ 
+        AccessorController.php
+        --------------------------
+            function ind(){
+                return Member::all();
+            }
+            
+        Make Route also
+        ----------------
+    --}}
+
+
+    **************MUTATOR*****************
+    ****************************************
+
+    {{-- 
+        WHEN WE are save data in database but we want some modification the we have to use mutator
+        
+        MutatorController.php
+        ----------------------
+            function ind(){
+                $data=new Member;
+                $data->name="Sumit";
+                $data->email="xyz@test.com";
+                $data->address="Mumbai";
+                $data->save();
+
+            }
+
+        model Member.php
+        -----------------
+            public function setNameAttribute($value){
+                return $this->attributes['name']='Mr. '.$value;
+            }
+
+            public function setAddressAttribute($value){
+                return $this->attributes['address']=$value.", India";
+            }
+
+        also make a route to hit function
+        -------------------------------
+    --}}
+
+
+
+    *******ONE TO ONE RELATION**********
+    ************************************
+    {{-- 
+        MAKE ATLEAST 2 MODELS AND  1 CONTROLLER
+        MAKE RELATION AND SHOW DATA
+
+        one employee can work on only one company ****
+
+        OnetoOneController.php
+        -------------------------
+            function index(){
+                return Employee::find(2)->companyData;
+            }
+
+        Employee.php model
+        -------------------
+            function companyData(){
+                return $this->hasOne('App\Models\Company');
+            }
+
+        in another model we do not have to do anything simply left it.
+
+        make sure create a route also ;
+    --}}
+
+    *******ONE TO Many RELATION**********
+    ************************************
+    {{-- 
+        
+        A record of one table has relations with multiple records of another table.
+
+        OnetoManyController.php
+        ------------------------
+            function index(){
+                return Employee::find(2)->deviceData;
+            }
+
+        Employee.php model
+        ----------------------
+            function deviceData(){
+                return $this->hasMany('App\Models\Device');
+            }
+
+        do the routing part also
+
+    --}}
+
+
+    *******Fluent String**********
+    ******************************
+{{--
+    * when we perform operation on string we have to assign many times values to a variabole;
+
+    simply we can perform in route page
+    ----------------------------------
+    use Illuminate\Support\Str;
+
+
+    $info="hi, lets learn laravel";
+    // $info=Str::ucfirst($info);
+    // $info=Str::replaceFirst("Hi","Sumit",$info);   //normally we are doing this.                                  
+    // $info=Str::camel($info);
+    // echo $info;
+    we can replace the above into bellow [Method Chaining]
+    -----------------------------------
+
+    $info="hi, lets learn laravel";
+    $info=Str::of($info)->ucfirst($info)
+    ->replaceFirst("Hi","Sumit",$info);
+    echo $info;
+
+ --}}
+
+*******Route Model Binding**********
+************************************
+{{--
+    * Its means injecting Route And Model To fetch data in minimal code from database .
+    
+    web.php
+    -----------
+        key by default taken as id for different value we need to define in the routing page.
+        Route::get('rmb/{key:name}',[DeviceController::class,'index']);
+
+    
+    DeviceController.php
+    -------------------------
+        function index(Device $key){
+
+            // return $key;
+            return $key->all();
+        }
+
+ --}}

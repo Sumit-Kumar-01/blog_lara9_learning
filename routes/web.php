@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AccessorController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\UsersController;
@@ -8,6 +9,14 @@ use App\Http\Controllers\UploadController;
 use App\Http\Controllers\memberController;
 use App\Http\Controllers\MembersController;
 use App\Http\Controllers\AggregateController;
+use App\Http\Controllers\DeviceController;
+use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\MutatorController;
+use App\Http\Controllers\OnetoManyController;
+use App\Http\Controllers\OnetoOneController;
+
+
+use Illuminate\Support\Str;
 
 /*
 |--------------------------------------------------------------------------
@@ -50,15 +59,34 @@ use App\Http\Controllers\AggregateController;
 // Route::view('noaccess','noaccess');
 
 
+// Fluent String Concept
+// --------------------------------
+
+
+// echo "Hello ! ";
+// $info="hi, lets learn laravel";
+// // $info=Str::ucfirst($info);
+// // $info=Str::replaceFirst("Hi","Sumit",$info);
+// // $info=Str::camel($info);
+
+// $info=Str::of($info)->ucfirst($info)
+// ->replaceFirst("Hi","Sumit",$info);
+// echo $info;
+
+
+Route::get('/', function () {
+        return view('welcome');
+    });
+
 Route::view('home','home');
 
 Route::view('noaccess','noaccess');
 Route::group(['middleware'=>['protectPage']],function(){
     Route::view('users','users');
 
-    Route::get('/', function () {
-        return view('welcome');
-    });
+    // Route::get('/', function () {
+    //     return view('welcome');
+    // });
 });
 
 
@@ -123,3 +151,28 @@ Route::get('list1',[MembersController::class,'operations']);
 //Aggregate functions
 
 Route::get('agrt',[AggregateController::class,'operations']);
+
+//joins
+
+
+
+//Accessor
+
+Route::get('accessor',[AccessorController::class,'ind']);
+
+//Mutator
+
+Route::get('mutator',[MutatorController::class,'ind']);
+
+//one to one relations
+Route::get('relation',[OnetoOneController::class,'index']);
+
+
+//one to many relations
+Route::get('relationm',[OnetoManyController::class,'index']);
+
+//Route Model Binding
+Route::get('rmb/{key:name}',[DeviceController::class,'index']);
+
+
+
