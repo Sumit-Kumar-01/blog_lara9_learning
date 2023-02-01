@@ -24,6 +24,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::get('data',[dummyAPI::class,'getData']);
 
-//get data with API
-Route::get('list',[DeviceCont::class,'list']);
+//get data with API and with parameter
+Route::get('list/{id?}',[DeviceCont::class,'list']);
 

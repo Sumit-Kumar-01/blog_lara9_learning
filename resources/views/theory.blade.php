@@ -1036,3 +1036,17 @@ use in js and view inside CONSOLE
         also make model and import the model in controller;
     
  --}}
+
+ *******GET API with Parameters*********
+************************************
+{{--
+     DeviceCont.php controller
+    ------------------------------
+        function list($id=null){
+            return $id?Device::find($id):Device::all();
+        }
+
+        api.php
+    -=----------
+        Route::get('list/{id?}',[DeviceCont::class,'list']);
+ --}}
