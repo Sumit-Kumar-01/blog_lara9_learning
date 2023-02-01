@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DeviceCont;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\dummyAPI;
@@ -22,4 +23,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 //First API in Laravel
 
 Route::get('data',[dummyAPI::class,'getData']);
+
+//get data with API
+Route::get('list',[DeviceCont::class,'list']);
 

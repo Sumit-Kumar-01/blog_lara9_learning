@@ -1018,3 +1018,21 @@ use in js and view inside CONSOLE
     ---------
         Route::get('data',[dummyAPI::class,'getData']);
  --}}
+
+*******GET DATA WITH API*********
+************************************
+{{-- make controller, make model, write code for API, test API on postman
+    ------------------------------------------------------------------------
+    
+    DeviceCont.php controller
+    ------------------------------
+         function list(){
+            return Device::all();
+        }
+    api.php
+    -=----------
+        Route::get('list',[DeviceCont::class,'list']);
+
+        also make model and import the model in controller;
+    
+ --}}
