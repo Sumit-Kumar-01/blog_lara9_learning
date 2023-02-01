@@ -27,3 +27,7 @@ Route::get('data',[dummyAPI::class,'getData']);
 //get data with API and with parameter
 Route::get('list/{id?}',[DeviceCont::class,'list']);
 
+//POST METHOD API
+Route::post('add',[DeviceCont::class,'add']);
+
+

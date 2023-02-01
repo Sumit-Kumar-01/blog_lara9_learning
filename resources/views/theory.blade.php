@@ -1050,3 +1050,37 @@ use in js and view inside CONSOLE
     -=----------
         Route::get('list/{id?}',[DeviceCont::class,'list']);
  --}}
+
+*******API WITH POST METHOD*********
+************************************
+{{--
+    * we use when have to save data into database;
+    *  
+    DeviceCont.php controller
+    ------------------------------
+        function add(Request $req){
+            $device =new Device;
+            $device->name=$req->name;
+            $device->employee_id=$req->employee_id;
+            $result=$device->save();
+            if($result)
+            {
+                return ['result'=>'Data Has been saved'];
+
+            }
+            else{
+                return ['result'=>'Operation Failed'];
+            }
+            // return ['result'=>'done'];
+        }
+    
+     api.php
+    -=----------
+        Route::post('add',[DeviceCont::class,'add']);
+
+    Device.php model
+    -----------------
+        public $timestamps=false; if you dont have the timestamp on your database table
+
+
+ --}}

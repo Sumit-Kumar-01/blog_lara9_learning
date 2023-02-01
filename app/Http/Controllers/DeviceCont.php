@@ -20,4 +20,21 @@ class DeviceCont extends Controller
         //     }
 
 
+        //POST METHOD API
+
+        function add(Request $req){
+            $device =new Device;
+            $device->name=$req->name;
+            $device->employee_id=$req->employee_id;
+            $result=$device->save();
+            if($result)
+            {
+                return ['result'=>'Data Has been saved'];
+
+            }
+            else{
+                return ['result'=>'Operation Failed'];
+            }
+            // return ['result'=>'done'];
+        }
 }
