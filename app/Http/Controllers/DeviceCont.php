@@ -37,4 +37,20 @@ class DeviceCont extends Controller
             }
             // return ['result'=>'done'];
         }
+
+        function update(Request $req){
+            $device = Device::find($req->id);
+            $device->name=$req->name;
+            $device->employee_id=$req->employee_id;
+            $result=$device->save();
+            if($result)
+            {
+                return ['result'=>'Data Has been Updated'];
+
+            }
+            else{
+                return ['result'=>'Operation Failed'];
+            }
+
+        }
 }

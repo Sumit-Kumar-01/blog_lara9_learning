@@ -30,4 +30,7 @@ Route::get('list/{id?}',[DeviceCont::class,'list']);
 //POST METHOD API
 Route::post('add',[DeviceCont::class,'add']);
 
+//PUT METHOD API
+Route::put('update',[DeviceCont::class,'update']);
+
 

@@ -1084,3 +1084,31 @@ use in js and view inside CONSOLE
 
 
  --}}
+
+
+ *******API WITH PUT METHOD*********
+************************************
+{{--
+     DeviceCont.php controller
+    ------------------------------
+        function update(Request $req){
+            $device = Device::find($req->id);
+            $device->name=$req->name;
+            $device->employee_id=$req->employee_id;
+            $result=$device->save();
+            if($result)
+            {
+                return ['result'=>'Data Has been Updated'];
+
+            }
+            else{
+                return ['result'=>'Operation Failed'];
+            }
+
+        }
+
+     api.php
+    -=----------
+        //PUT METHOD API
+        Route::put('update',[DeviceCont::class,'update']);
+ --}}
