@@ -991,3 +991,30 @@ use in js and view inside CONSOLE
         }
 
  --}}
+
+ *******API lARAVEL**********
+************************************
+{{--
+    * APPLICATION PROGRAMMING INTERFACE [JOSON FORMAT]
+    ----------------------------------------
+    * connect two technology and transfer data from one to another
+    * for example react , view ,Angular, Android and others are unable to connect with database irectly
+
+
+ --}}
+
+ *******FIRST API IN lARAVEL**********
+************************************
+{{--
+    make controller, make route, write small code , test API on postman
+    --------------------------------------------------------------------
+    dummyAPI.php  controller
+    --------------- 
+        function getData(){
+            return ['name'=>'Sumit','email'=>'sumit@gmail.com','address'=>'Odisha'];
+        }
+
+    api.php
+    ---------
+        Route::get('data',[dummyAPI::class,'getData']);
+ --}}
